@@ -1,405 +1,518 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>翊華程式設計Github觀念小複習</title>
   <style>
-    * { box-sizing: border-box; }
-    :root {
-      --navy: #07152f;
-      --deep-blue: #0d2a63;
-      --case-blue: #123b8a;
-      --gold: #ffd25a;
-      --red: #e83345;
-      --paper: #f8fbff;
-      --ink: #10203f;
-      --sky: #4cc9ff;
-      --green: #2ee59d;
-      --shadow: rgba(0, 0, 0, .32);
+    * {
+      box-sizing: border-box;
     }
+
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
-      color: var(--paper);
+      font-family: "Microsoft JhengHei", "Noto Sans TC", Arial, sans-serif;
       background:
-        radial-gradient(circle at 14% 16%, rgba(76, 201, 255, .28), transparent 25%),
-        radial-gradient(circle at 86% 12%, rgba(255, 210, 90, .22), transparent 24%),
-        radial-gradient(circle at 80% 86%, rgba(232, 51, 69, .18), transparent 30%),
-        linear-gradient(135deg, #050a18 0%, #07152f 42%, #123b8a 100%);
+        radial-gradient(circle at 10% 15%, rgba(255, 215, 75, 0.28), transparent 26%),
+        radial-gradient(circle at 90% 10%, rgba(75, 180, 255, 0.25), transparent 28%),
+        radial-gradient(circle at 80% 85%, rgba(235, 45, 65, 0.18), transparent 32%),
+        linear-gradient(135deg, #050914 0%, #071a3d 45%, #0d3b82 100%);
+      color: #0b1833;
       display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: center;
       padding: 20px;
-      overflow-x: hidden;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle, #000 0 55%, transparent 82%);
-    }
-    .wrap {
+
+    .stage {
       width: min(980px, 100%);
-      background: linear-gradient(180deg, rgba(248,251,255,.98), rgba(223,235,255,.96));
-      color: var(--ink);
-      border: 4px solid var(--gold);
+      background: linear-gradient(180deg, #f8fbff, #e7f1ff);
+      border: 5px solid #ffd44d;
       border-radius: 28px;
-      padding: 28px;
-      box-shadow: 0 24px 70px var(--shadow), 0 0 0 8px rgba(76,201,255,.12);
-      position: relative;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
       overflow: hidden;
-    }
-    .wrap::before {
-      content: "CASE FILE";
-      position: absolute;
-      right: -28px;
-      top: 36px;
-      transform: rotate(18deg);
-      font-size: 52px;
-      font-weight: 1000;
-      color: rgba(18, 59, 138, .08);
-      letter-spacing: 5px;
-    }
-    .wrap::after {
-      content: "🔎";
-      position: absolute;
-      left: 20px;
-      bottom: -18px;
-      font-size: 110px;
-      opacity: .12;
-      transform: rotate(-20deg);
-    }
-    .hero {
       position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 8px 10px 12px;
     }
-    .label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--navy);
-      color: var(--gold);
-      border: 2px solid var(--gold);
-      border-radius: 999px;
-      padding: 8px 18px;
+
+    .top-bar {
+      background: linear-gradient(135deg, #071a3d, #123f8d);
+      color: white;
+      padding: 22px 24px;
+      border-bottom: 5px solid #e9364b;
+      position: relative;
+    }
+
+    .top-bar::after {
+      content: "CASE";
+      position: absolute;
+      right: 24px;
+      top: 12px;
+      font-size: 54px;
       font-weight: 900;
-      letter-spacing: 1px;
-      box-shadow: 0 5px 0 rgba(0,0,0,.25);
-      margin-bottom: 10px;
+      color: rgba(255, 255, 255, 0.08);
+      letter-spacing: 8px;
     }
-    .mascot {
-      font-size: 72px;
-      filter: drop-shadow(0 8px 0 rgba(0,0,0,.13));
-      animation: detectiveFloat 2.4s ease-in-out infinite;
-    }
-    @keyframes detectiveFloat {
-      0%,100% { transform: translateY(0) rotate(-1deg); }
-      50% { transform: translateY(-8px) rotate(1deg); }
-    }
-    h1 {
-      margin: 8px 0 8px;
-      color: var(--deep-blue);
-      font-size: clamp(30px, 5vw, 50px);
-      font-weight: 1000;
-      letter-spacing: 1px;
-      text-shadow: 3px 3px 0 var(--gold), 5px 5px 0 rgba(232,51,69,.25);
-    }
-    .subtitle {
+
+    .tag {
       display: inline-block;
-      color: #fff;
-      background: linear-gradient(135deg, var(--case-blue), var(--navy));
-      border-left: 8px solid var(--red);
-      border-right: 8px solid var(--gold);
-      border-radius: 16px;
-      padding: 12px 18px;
-      font-size: 18px;
-      font-weight: 800;
-      box-shadow: 0 8px 20px rgba(7,21,47,.22);
+      background: #ffd44d;
+      color: #071a3d;
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 0 #b78918;
     }
+
+    h1 {
+      margin: 8px 0;
+      font-size: clamp(30px, 5vw, 50px);
+      line-height: 1.15;
+      color: #ffffff;
+      text-shadow: 3px 3px 0 #e9364b, 5px 5px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .intro {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #dcecff;
+      font-weight: 700;
+      max-width: 720px;
+    }
+
+    .content {
+      padding: 26px;
+      position: relative;
+    }
+
+    .mascot {
+      position: absolute;
+      right: 22px;
+      top: -34px;
+      width: 110px;
+      height: 110px;
+      background: #ffffff;
+      border: 4px solid #ffd44d;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+    }
+
     .status {
       display: flex;
-      justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
-      margin: 20px 0;
-      position: relative;
-      z-index: 1;
+      margin-bottom: 18px;
+      padding-right: 130px;
     }
-    .badge {
-      background: #07152f;
-      color: #fff;
-      border: 2px solid var(--sky);
+
+    .pill {
+      background: #071a3d;
+      color: white;
+      border: 2px solid #4fc3ff;
       border-radius: 999px;
       padding: 10px 18px;
-      font-weight: 1000;
-      box-shadow: 0 5px 0 rgba(7,21,47,.35);
+      font-weight: 900;
+      box-shadow: 0 5px 0 rgba(0, 0, 0, 0.25);
     }
-    .badge strong { color: var(--gold); }
-    .question-card {
-      position: relative;
-      z-index: 1;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.97), rgba(238,246,255,.98));
-      border: 3px solid var(--case-blue);
+
+    .pill span {
+      color: #ffd44d;
+    }
+
+    .card {
+      background: white;
+      border: 4px solid #123f8d;
       border-radius: 22px;
       padding: 24px;
-      box-shadow: inset 0 0 0 4px rgba(255,210,90,.35), 0 16px 28px rgba(18,59,138,.16);
+      box-shadow: inset 0 0 0 4px rgba(255, 212, 77, 0.32), 0 14px 25px rgba(10, 33, 77, 0.18);
     }
-    .question-card::before {
-      content: "程式案件線索";
-      position: absolute;
-      top: -16px;
-      left: 24px;
-      background: var(--red);
+
+    .case-title {
+      display: inline-block;
+      background: #e9364b;
       color: white;
-      padding: 6px 16px;
+      padding: 7px 16px;
       border-radius: 999px;
-      font-weight: 1000;
-      border: 2px solid #fff;
-      box-shadow: 0 4px 0 rgba(0,0,0,.22);
+      font-weight: 900;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 0 #991a27;
     }
+
     .question {
       font-size: clamp(22px, 3vw, 31px);
-      font-weight: 1000;
-      line-height: 1.45;
-      margin: 12px 0 18px;
-      color: var(--navy);
+      font-weight: 900;
+      line-height: 1.5;
+      color: #071a3d;
+      margin-bottom: 18px;
     }
+
     .options {
       display: grid;
       gap: 14px;
     }
+
     .option {
-      border: 3px solid var(--deep-blue);
-      background: linear-gradient(180deg, #ffffff, #e8f2ff);
-      color: var(--navy);
+      width: 100%;
+      border: 3px solid #123f8d;
       border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff, #eaf3ff);
+      color: #071a3d;
       padding: 16px 18px;
       font-size: 20px;
       font-weight: 900;
-      cursor: pointer;
       text-align: left;
-      box-shadow: 0 7px 0 #102b63;
-      transition: transform .15s, filter .15s, background .15s;
+      cursor: pointer;
+      box-shadow: 0 7px 0 #0a2554;
+      transition: transform 0.15s, filter 0.15s;
+      line-height: 1.45;
     }
+
     .option:hover:not(:disabled) {
-      transform: translateY(-4px);
-      filter: brightness(1.04);
-      background: linear-gradient(180deg, #fff8d7, #e8f2ff);
+      transform: translateY(-3px);
+      filter: brightness(1.05);
     }
-    .option:disabled { cursor: not-allowed; }
+
+    .option:disabled {
+      cursor: not-allowed;
+    }
+
     .option.correct {
-      background: linear-gradient(180deg, #e5fff4, #bfffe3);
+      background: linear-gradient(180deg, #e4fff4, #b9ffe1);
       border-color: #00a86b;
-      box-shadow: 0 7px 0 #087e56;
+      box-shadow: 0 7px 0 #06784f;
     }
+
     .option.wrong {
-      background: linear-gradient(180deg, #ffe6e6, #ffc7c7);
-      border-color: var(--red);
-      box-shadow: 0 7px 0 #a71928;
+      background: linear-gradient(180deg, #ffe6e6, #ffc5c5);
+      border-color: #e9364b;
+      box-shadow: 0 7px 0 #991a27;
     }
+
     .feedback {
       display: none;
       margin-top: 18px;
-      background: #fff9df;
-      color: #27324d;
-      border: 3px solid var(--gold);
-      border-left: 10px solid var(--red);
+      background: #fff8d8;
+      border: 3px solid #ffd44d;
+      border-left: 10px solid #e9364b;
       border-radius: 18px;
       padding: 16px 18px;
       font-size: 19px;
       line-height: 1.65;
-      box-shadow: 0 8px 18px rgba(7,21,47,.12);
+      color: #17213d;
+      font-weight: 700;
     }
-    .feedback.show { display: block; animation: pop .18s ease-out; }
-    @keyframes pop { from { transform: scale(.98); opacity: .4; } to { transform: scale(1); opacity: 1; } }
-    .next, .restart {
+
+    .feedback.show {
+      display: block;
+    }
+
+    .next,
+    .restart {
       display: block;
       margin: 22px auto 0;
       border: 0;
       border-radius: 999px;
-      padding: 14px 40px;
+      padding: 14px 42px;
       font-size: 22px;
-      font-weight: 1000;
-      color: #fff;
-      background: linear-gradient(135deg, var(--red), var(--case-blue));
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(135deg, #e9364b, #123f8d);
+      box-shadow: 0 8px 0 #071a3d, 0 0 0 3px #ffd44d;
       cursor: pointer;
-      box-shadow: 0 8px 0 #07152f, 0 0 0 3px var(--gold);
-      transition: transform .15s, filter .15s;
     }
-    .next:hover:not(:disabled), .restart:hover { transform: translateY(-3px); filter: brightness(1.05); }
-    .next:disabled { opacity: .45; cursor: not-allowed; }
+
+    .next:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
     .result {
       display: none;
       text-align: center;
-      padding: 30px 18px;
-      position: relative;
-      z-index: 1;
+      padding: 20px;
     }
+
+    .result-icon {
+      font-size: 76px;
+    }
+
     .result h2 {
-      color: var(--deep-blue);
       font-size: clamp(34px, 5vw, 50px);
-      text-shadow: 3px 3px 0 var(--gold);
+      color: #071a3d;
+      text-shadow: 3px 3px 0 #ffd44d;
     }
+
     .result p {
       font-size: 23px;
       line-height: 1.7;
       font-weight: 800;
     }
+
     .footer {
-      position: relative;
-      z-index: 1;
       text-align: center;
-      margin-top: 18px;
-      color: #44506b;
+      padding: 16px 20px 22px;
+      color: #46546f;
       font-size: 14px;
       font-weight: 700;
     }
-    @media (max-width: 620px) {
-      .wrap { padding: 20px; border-radius: 22px; }
-      .mascot { font-size: 58px; }
-      .option { font-size: 18px; }
+
+    code {
+      background: #071a3d;
+      color: #ffd44d;
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 640px) {
+      .content {
+        padding: 20px;
+      }
+      .mascot {
+        position: static;
+        margin: -4px auto 16px;
+      }
+      .status {
+        padding-right: 0;
+      }
+      .option {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section id="quiz">
-      <div class="hero">
-        <div class="label">🔎 Detective Coding Case</div>
-        <div class="mascot">🕵️‍♂️💻🎀</div>
-        <h1>翊華程式設計Github觀念小複習</h1>
-        <div class="subtitle">破解 15 題程式線索，答錯會出現解答與偵探提示！</div>
-      </div>
+  <main class="stage">
+    <header class="top-bar">
+      <div class="tag">Detective Coding Quiz</div>
+      <h1>翊華程式設計Github觀念小複習</h1>
+      <div class="intro">化身程式小偵探，破解 GitHub、HTML、CSS、JavaScript 與 PWA 的 15 個案件。最後 5 題難度提升，答錯也會出現解答。</div>
+    </header>
+
+    <section class="content" id="quizArea">
+      <div class="mascot">🔎</div>
+
       <div class="status">
-        <div class="badge" id="count">第 <strong>1</strong> / 15 題</div>
-        <div class="badge" id="score">分數：<strong>0</strong></div>
+        <div class="pill">案件 <span id="questionNumber">1</span> / <span id="totalNumber">15</span></div>
+        <div class="pill">分數 <span id="scoreNumber">0</span></div>
       </div>
-      <div class="question-card">
-        <div class="question" id="question"></div>
-        <div class="options" id="options"></div>
-        <div class="feedback" id="feedback"></div>
+
+      <div class="card">
+        <div class="case-title">程式案件線索</div>
+        <div class="question" id="questionText"></div>
+        <div class="options" id="optionBox"></div>
+        <div class="feedback" id="feedbackBox"></div>
       </div>
-      <button class="next" id="next" disabled>下一個案件 ✨</button>
+
+      <button class="next" id="nextButton" disabled>下一個案件</button>
     </section>
-    <section class="result" id="result">
-      <div class="mascot">🏆🔎💻</div>
+
+    <section class="result" id="resultArea">
+      <div class="result-icon">🏆🔎💻</div>
       <h2>案件破解完成！</h2>
       <p id="finalScore"></p>
-      <p id="comment"></p>
+      <p id="finalComment"></p>
       <button class="restart" onclick="restartQuiz()">重新辦案</button>
     </section>
-    <div class="footer">翊華程式設計課程｜GitHub × HTML × JavaScript × CSS × PWA｜Detective Anime Style</div>
+
+    <div class="footer">翊華程式設計課程｜GitHub Pages｜HTML｜CSS｜JavaScript｜PWA</div>
   </main>
 
   <script>
     const questions = [
-      { q: "GitHub 主要可以用來做什麼？", o: ["玩線上遊戲", "儲存與管理程式碼", "製作圖片濾鏡"], a: 1, e: "GitHub 可以用來儲存、管理與分享程式碼，也能讓多人合作。" },
-      { q: "網站首頁最常使用的檔名是？", o: ["index.html", "game.txt", "photo.jpg"], a: 0, e: "GitHub Pages 通常會優先讀取 index.html 作為首頁。" },
-      { q: "HTML 主要負責網頁的哪個部分？", o: ["網頁結構", "資料庫管理", "電腦開機"], a: 0, e: "HTML 負責標題、段落、按鈕、圖片等網頁結構。" },
-      { q: "CSS 主要負責什麼？", o: ["網頁外觀樣式", "遊戲存檔", "錄製聲音"], a: 0, e: "CSS 負責顏色、排版、字型、大小與動畫效果。" },
-      { q: "JavaScript 可以讓網頁變得如何？", o: ["可以互動", "只能顯示黑白", "不能點擊"], a: 0, e: "按鈕、計分、切換題目等互動功能常使用 JavaScript。" },
-      { q: "GitHub Pages 可以用來做什麼？", o: ["發布網站", "修理鍵盤", "刪除瀏覽器"], a: 0, e: "GitHub Pages 可以把 HTML、CSS、JS 作品發布成網站。" },
-      { q: "修改程式後，要更新到 GitHub，通常要做什麼？", o: ["重新上傳或 commit 修改", "關掉螢幕", "刪除所有檔案"], a: 0, e: "修改後需要上傳檔案或 commit，讓 GitHub 記錄新版本。" },
-      { q: "PWA 的特色是什麼？", o: ["讓網站更像 App", "只能在電視上用", "不能放圖片"], a: 0, e: "PWA 可以讓網站像 App 一樣被安裝到手機或電腦桌面。" },
-      { q: "製作 PWA 常見的重要檔案是？", o: ["manifest.json", "homework.docx", "cat.mp3"], a: 0, e: "manifest.json 可設定 App 名稱、圖示與顯示方式。" },
-      { q: "TTS 是什麼意思？", o: ["文字轉語音", "圖片變影片", "滑鼠速度設定"], a: 0, e: "TTS 是 Text To Speech，也就是把文字轉成語音。" },
-      { q: "如果 index.html 放在 repo 根目錄，但 GitHub Pages 顯示 404，最可能要先檢查什麼？", o: ["Pages 是否啟用，branch 是否選 main/root", "電腦鍵盤是否太髒", "CSS 顏色是否太亮"], a: 0, e: "最後五題難度提高！404 常見原因是 GitHub Pages 尚未啟用、branch 或資料夾設定錯誤，或部署還沒完成。" },
-      { q: "同一個資料夾中有 style.css，HTML 要正確連結它，通常應該寫哪一段？", o: ["<link rel=\"stylesheet\" href=\"style.css\">", "<script src=\"style.css\"></script>", "<img src=\"style.css\">"], a: 0, e: "CSS 要用 link 標籤載入；script 是載入 JavaScript，img 是載入圖片。" },
-      { q: "PWA 想要離線也能開啟部分內容，通常需要搭配哪一種檔案或技術？", o: ["Service Worker", "PowerPoint", "滑鼠右鍵"], a: 0, e: "Service Worker 可以快取網頁資源，讓 PWA 具備離線或加速載入能力。" },
-      { q: "網頁在本機可以顯示圖片，但上傳 GitHub Pages 後圖片破掉，常見原因是什麼？", o: ["檔名大小寫或路徑不一致", "瀏覽器不喜歡圖片", "HTML 一定不能放圖片"], a: 0, e: "GitHub Pages 對檔名大小寫很敏感。cat.png 和 Cat.png 會被視為不同檔案。" },
-      { q: "學生把 JS 寫在 main.js，HTML 中哪一種寫法最合理？", o: ["<script src=\"main.js\"></script>", "<link href=\"main.js\">", "<style src=\"main.js\"></style>"], a: 0, e: "外部 JavaScript 檔案要用 script src 載入。若路徑錯誤，按鈕和遊戲邏輯可能失效。" }
+      {
+        q: "GitHub 主要可以用來做什麼？",
+        o: ["儲存與管理程式碼", "修理電腦螢幕", "幫圖片自動去背"],
+        a: 0,
+        e: "GitHub 可以儲存、管理、分享程式碼，也很適合放學生作品。"
+      },
+      {
+        q: "網站首頁最常使用的檔名是什麼？",
+        o: ["index.html", "game.txt", "school.jpg"],
+        a: 0,
+        e: "GitHub Pages 通常會優先讀取 index.html 當作首頁。"
+      },
+      {
+        q: "HTML 在網頁中主要負責什麼？",
+        o: ["網頁結構", "網頁顏色", "網頁互動邏輯"],
+        a: 0,
+        e: "HTML 負責標題、段落、按鈕、圖片等基本結構。"
+      },
+      {
+        q: "CSS 在網頁中主要負責什麼？",
+        o: ["外觀與排版", "登入密碼", "滑鼠硬體"],
+        a: 0,
+        e: "CSS 負責顏色、字體、大小、排版、動畫與整體視覺風格。"
+      },
+      {
+        q: "JavaScript 最常用來讓網頁產生什麼效果？",
+        o: ["互動效果", "自動充電", "關閉網路"],
+        a: 0,
+        e: "按鈕點擊、分數計算、題目切換、遊戲流程常用 JavaScript 控制。"
+      },
+      {
+        q: "GitHub Pages 的主要功能是什麼？",
+        o: ["把作品發布成網站", "把電腦變快", "把圖片變成音樂"],
+        a: 0,
+        e: "GitHub Pages 可以把 HTML、CSS、JavaScript 作品變成可分享的網站。"
+      },
+      {
+        q: "修改程式碼後，要讓 GitHub 上的作品更新，通常需要做什麼？",
+        o: ["重新上傳或 commit 修改", "關掉螢幕", "刪除瀏覽器"],
+        a: 0,
+        e: "程式修改後，要重新上傳或 commit，GitHub 才會保存新版本。"
+      },
+      {
+        q: "PWA 的特色是什麼？",
+        o: ["讓網站更像 App", "只能用在電視", "完全不能放圖片"],
+        a: 0,
+        e: "PWA 可以讓網站看起來更像 App，部分情況還能安裝到手機桌面。"
+      },
+      {
+        q: "製作 PWA 常見的重要設定檔是什麼？",
+        o: ["manifest.json", "homework.docx", "music.mp3"],
+        a: 0,
+        e: "manifest.json 可以設定 App 名稱、圖示、啟動畫面與顯示方式。"
+      },
+      {
+        q: "TTS 是什麼意思？",
+        o: ["文字轉語音", "圖片轉表格", "滑鼠速度測試"],
+        a: 0,
+        e: "TTS 是 Text To Speech，也就是把文字轉成語音。"
+      },
+      {
+        q: "難題 1：index.html 已經放在 repo 根目錄，但 GitHub Pages 顯示 404，最應該先檢查什麼？",
+        o: ["Pages 是否啟用，branch 是否選 main 和 root", "螢幕亮度是否太低", "CSS 顏色是否太深"],
+        a: 0,
+        e: "404 常見原因是 Pages 沒啟用、branch 選錯、資料夾不是 root，或部署還沒完成。"
+      },
+      {
+        q: "難題 2：同一資料夾有 style.css，HTML 要載入它，應該使用哪一種方式？",
+        o: ["使用 link 標籤，href 指向 style.css", "使用 img 標籤，src 指向 style.css", "使用 audio 標籤，src 指向 style.css"],
+        a: 0,
+        e: "CSS 檔案要用 link 標籤載入，href 寫 style.css。"
+      },
+      {
+        q: "難題 3：PWA 想支援離線快取，通常需要哪一種技術？",
+        o: ["Service Worker", "PowerPoint", "鍵盤快捷鍵"],
+        a: 0,
+        e: "Service Worker 可以幫網頁快取資源，讓 PWA 有機會支援離線開啟。"
+      },
+      {
+        q: "難題 4：本機圖片正常，上傳 GitHub Pages 後破圖，常見原因是什麼？",
+        o: ["檔名大小寫或路徑不一致", "HTML 一定不能放圖片", "圖片太可愛所以被擋住"],
+        a: 0,
+        e: "GitHub Pages 對大小寫敏感。cat.png 和 Cat.png 是不同檔案，路徑也要完全正確。"
+      },
+      {
+        q: "難題 5：main.js 是外部 JavaScript 檔案，HTML 應該如何載入？",
+        o: ["使用 script 標籤，src 指向 main.js", "使用 link 標籤，href 指向 main.js", "使用 h1 標籤顯示 main.js"],
+        a: 0,
+        e: "外部 JavaScript 要用 script 標籤載入，src 寫 main.js。路徑錯誤時互動功能可能失效。"
+      }
     ];
 
-    let current = 0;
-    let points = 0;
+    let currentIndex = 0;
+    let score = 0;
     let answered = false;
 
-    const questionEl = document.getElementById("question");
-    const optionsEl = document.getElementById("options");
-    const feedbackEl = document.getElementById("feedback");
-    const nextBtn = document.getElementById("next");
-    const countEl = document.getElementById("count");
-    const scoreEl = document.getElementById("score");
-    const quizEl = document.getElementById("quiz");
-    const resultEl = document.getElementById("result");
+    const questionNumber = document.getElementById("questionNumber");
+    const totalNumber = document.getElementById("totalNumber");
+    const scoreNumber = document.getElementById("scoreNumber");
+    const questionText = document.getElementById("questionText");
+    const optionBox = document.getElementById("optionBox");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const nextButton = document.getElementById("nextButton");
+    const quizArea = document.getElementById("quizArea");
+    const resultArea = document.getElementById("resultArea");
+    const finalScore = document.getElementById("finalScore");
+    const finalComment = document.getElementById("finalComment");
+
+    totalNumber.textContent = questions.length;
 
     function loadQuestion() {
       answered = false;
-      nextBtn.disabled = true;
-      feedbackEl.classList.remove("show");
-      feedbackEl.innerHTML = "";
+      nextButton.disabled = true;
+      feedbackBox.classList.remove("show");
+      feedbackBox.textContent = "";
+      optionBox.innerHTML = "";
 
-      const item = questions[current];
-      questionEl.textContent = `${current + 1}. ${item.q}`;
-      countEl.innerHTML = `第 <strong>${current + 1}</strong> / ${questions.length} 題`;
-      scoreEl.innerHTML = `分數：<strong>${points}</strong>`;
-      optionsEl.innerHTML = "";
+      const item = questions[currentIndex];
+      questionNumber.textContent = currentIndex + 1;
+      scoreNumber.textContent = score;
+      questionText.textContent = item.q;
 
-      item.o.forEach((text, index) => {
-        const btn = document.createElement("button");
-        btn.className = "option";
-        btn.textContent = `${String.fromCharCode(65 + index)}. ${text}`;
-        btn.onclick = () => checkAnswer(index, btn);
-        optionsEl.appendChild(btn);
+      item.o.forEach(function(optionText, index) {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = String.fromCharCode(65 + index) + ". " + optionText;
+        button.addEventListener("click", function() {
+          checkAnswer(index, button);
+        });
+        optionBox.appendChild(button);
       });
     }
 
-    function checkAnswer(index, button) {
+    function checkAnswer(selectedIndex, selectedButton) {
       if (answered) return;
       answered = true;
 
-      const item = questions[current];
+      const item = questions[currentIndex];
       const buttons = document.querySelectorAll(".option");
 
-      buttons.forEach((btn, i) => {
-        btn.disabled = true;
-        if (i === item.a) btn.classList.add("correct");
+      buttons.forEach(function(button, index) {
+        button.disabled = true;
+        if (index === item.a) {
+          button.classList.add("correct");
+        }
       });
 
-      if (index === item.a) {
-        points += 10;
-        feedbackEl.innerHTML = `<strong>推理正確！線索吻合 🌟</strong><br>${item.e}`;
+      if (selectedIndex === item.a) {
+        score += 10;
+        feedbackBox.innerHTML = "<strong>推理正確！</strong><br>" + item.e;
       } else {
-        button.classList.add("wrong");
-        feedbackEl.innerHTML = `<strong>推理失誤，但案件還沒結束 🔎</strong><br>正確答案是：<strong>${String.fromCharCode(65 + item.a)}. ${item.o[item.a]}</strong><br>解答：${item.e}`;
+        selectedButton.classList.add("wrong");
+        feedbackBox.innerHTML = "<strong>推理失誤，但案件還沒結束。</strong><br>正確答案是：<strong>" + String.fromCharCode(65 + item.a) + ". " + item.o[item.a] + "</strong><br>解答：" + item.e;
       }
 
-      scoreEl.innerHTML = `分數：<strong>${points}</strong>`;
-      feedbackEl.classList.add("show");
-      nextBtn.disabled = false;
+      scoreNumber.textContent = score;
+      feedbackBox.classList.add("show");
+      nextButton.disabled = false;
     }
 
-    nextBtn.addEventListener("click", () => {
-      current++;
-      if (current < questions.length) loadQuestion();
-      else showResult();
+    nextButton.addEventListener("click", function() {
+      currentIndex++;
+      if (currentIndex < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
     });
 
     function showResult() {
-      quizEl.style.display = "none";
-      resultEl.style.display = "block";
-      document.getElementById("finalScore").textContent = `你的總分是：${points} / ${questions.length * 10}`;
-      const comment = document.getElementById("comment");
-      if (points >= 130) comment.textContent = "完美破案！你已經是 GitHub 發布與網頁除錯小偵探。";
-      else if (points >= 90) comment.textContent = "案件大致破解！再複習路徑、Pages 與 PWA，就能更穩。";
-      else comment.textContent = "線索還有點混亂，重新挑戰一次，下一輪就能抓到關鍵證據。";
+      quizArea.style.display = "none";
+      resultArea.style.display = "block";
+      finalScore.textContent = "你的總分是：" + score + " / " + (questions.length * 10);
+
+      if (score >= 130) {
+        finalComment.textContent = "完美破案！你已經掌握 GitHub 發布、路徑與 PWA 觀念。";
+      } else if (score >= 90) {
+        finalComment.textContent = "案件大致破解！再複習 GitHub Pages、檔案路徑與 PWA，就更穩了。";
+      } else {
+        finalComment.textContent = "線索還有點混亂，重新挑戰一次，下一輪就能抓到關鍵證據。";
+      }
     }
 
     function restartQuiz() {
-      current = 0;
-      points = 0;
-      quizEl.style.display = "block";
-      resultEl.style.display = "none";
+      currentIndex = 0;
+      score = 0;
+      quizArea.style.display = "block";
+      resultArea.style.display = "none";
       loadQuestion();
     }
 
