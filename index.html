@@ -6,179 +6,299 @@
   <title>翊華程式設計Github觀念小複習</title>
   <style>
     * { box-sizing: border-box; }
+    :root {
+      --navy: #07152f;
+      --deep-blue: #0d2a63;
+      --case-blue: #123b8a;
+      --gold: #ffd25a;
+      --red: #e83345;
+      --paper: #f8fbff;
+      --ink: #10203f;
+      --sky: #4cc9ff;
+      --green: #2ee59d;
+      --shadow: rgba(0, 0, 0, .32);
+    }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      font-family: "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
+      color: var(--paper);
       background:
-        radial-gradient(circle at 10% 10%, rgba(255, 210, 235, .95), transparent 28%),
-        radial-gradient(circle at 90% 15%, rgba(180, 230, 255, .9), transparent 28%),
-        linear-gradient(135deg, #fff0f7, #e6f7ff 52%, #fff7d6);
+        radial-gradient(circle at 14% 16%, rgba(76, 201, 255, .28), transparent 25%),
+        radial-gradient(circle at 86% 12%, rgba(255, 210, 90, .22), transparent 24%),
+        radial-gradient(circle at 80% 86%, rgba(232, 51, 69, .18), transparent 30%),
+        linear-gradient(135deg, #050a18 0%, #07152f 42%, #123b8a 100%);
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      color: #333;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle, #000 0 55%, transparent 82%);
     }
     .wrap {
-      width: min(960px, 100%);
-      background: rgba(255,255,255,.94);
-      border: 4px solid #ff9acc;
-      border-radius: 30px;
+      width: min(980px, 100%);
+      background: linear-gradient(180deg, rgba(248,251,255,.98), rgba(223,235,255,.96));
+      color: var(--ink);
+      border: 4px solid var(--gold);
+      border-radius: 28px;
       padding: 28px;
-      box-shadow: 0 18px 42px rgba(255, 92, 168, .28);
+      box-shadow: 0 24px 70px var(--shadow), 0 0 0 8px rgba(76,201,255,.12);
       position: relative;
       overflow: hidden;
     }
     .wrap::before {
-      content: "✦";
+      content: "CASE FILE";
       position: absolute;
-      right: 24px;
-      top: 14px;
+      right: -28px;
+      top: 36px;
+      transform: rotate(18deg);
+      font-size: 52px;
+      font-weight: 1000;
+      color: rgba(18, 59, 138, .08);
+      letter-spacing: 5px;
+    }
+    .wrap::after {
+      content: "🔎";
+      position: absolute;
+      left: 20px;
+      bottom: -18px;
       font-size: 110px;
-      color: rgba(255, 92, 168, .12);
+      opacity: .12;
+      transform: rotate(-20deg);
     }
     .hero {
-      text-align: center;
       position: relative;
       z-index: 1;
+      text-align: center;
+      padding: 8px 10px 12px;
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      box-shadow: 0 5px 0 rgba(0,0,0,.25);
+      margin-bottom: 10px;
     }
     .mascot {
-      font-size: 70px;
-      animation: floaty 2.2s ease-in-out infinite;
+      font-size: 72px;
+      filter: drop-shadow(0 8px 0 rgba(0,0,0,.13));
+      animation: detectiveFloat 2.4s ease-in-out infinite;
     }
-    @keyframes floaty {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+    @keyframes detectiveFloat {
+      0%,100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
     }
     h1 {
       margin: 8px 0 8px;
-      color: #ff4fa3;
-      font-size: clamp(28px, 5vw, 46px);
-      text-shadow: 3px 3px 0 #ffe3f1;
+      color: var(--deep-blue);
+      font-size: clamp(30px, 5vw, 50px);
+      font-weight: 1000;
       letter-spacing: 1px;
+      text-shadow: 3px 3px 0 var(--gold), 5px 5px 0 rgba(232,51,69,.25);
     }
     .subtitle {
-      color: #6a6a6a;
+      display: inline-block;
+      color: #fff;
+      background: linear-gradient(135deg, var(--case-blue), var(--navy));
+      border-left: 8px solid var(--red);
+      border-right: 8px solid var(--gold);
+      border-radius: 16px;
+      padding: 12px 18px;
       font-size: 18px;
-      margin-bottom: 18px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(7,21,47,.22);
     }
     .status {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
-      margin: 18px 0;
+      margin: 20px 0;
+      position: relative;
+      z-index: 1;
     }
     .badge {
-      background: #fff3fb;
-      border: 2px solid #ffacd4;
+      background: #07152f;
+      color: #fff;
+      border: 2px solid var(--sky);
       border-radius: 999px;
       padding: 10px 18px;
-      color: #d9368c;
-      font-weight: 800;
-      box-shadow: 0 5px 0 #ffd1e6;
+      font-weight: 1000;
+      box-shadow: 0 5px 0 rgba(7,21,47,.35);
     }
+    .badge strong { color: var(--gold); }
     .question-card {
-      background: linear-gradient(180deg, #fff, #fff8fc);
-      border: 3px dashed #ffb4d8;
-      border-radius: 24px;
+      position: relative;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.97), rgba(238,246,255,.98));
+      border: 3px solid var(--case-blue);
+      border-radius: 22px;
       padding: 24px;
+      box-shadow: inset 0 0 0 4px rgba(255,210,90,.35), 0 16px 28px rgba(18,59,138,.16);
+    }
+    .question-card::before {
+      content: "程式案件線索";
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      background: var(--red);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-weight: 1000;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 0 rgba(0,0,0,.22);
     }
     .question {
-      font-size: clamp(22px, 3vw, 30px);
-      font-weight: 900;
+      font-size: clamp(22px, 3vw, 31px);
+      font-weight: 1000;
       line-height: 1.45;
-      margin-bottom: 18px;
+      margin: 12px 0 18px;
+      color: var(--navy);
     }
     .options {
       display: grid;
       gap: 14px;
     }
     .option {
-      border: 3px solid #9edcff;
-      background: #f3fbff;
+      border: 3px solid var(--deep-blue);
+      background: linear-gradient(180deg, #ffffff, #e8f2ff);
+      color: var(--navy);
       border-radius: 18px;
       padding: 16px 18px;
       font-size: 20px;
-      font-weight: 800;
+      font-weight: 900;
       cursor: pointer;
       text-align: left;
-      box-shadow: 0 6px 0 #b7e8ff;
-      transition: .15s;
+      box-shadow: 0 7px 0 #102b63;
+      transition: transform .15s, filter .15s, background .15s;
     }
     .option:hover:not(:disabled) {
-      transform: translateY(-3px);
-      background: #e7f7ff;
+      transform: translateY(-4px);
+      filter: brightness(1.04);
+      background: linear-gradient(180deg, #fff8d7, #e8f2ff);
     }
+    .option:disabled { cursor: not-allowed; }
     .option.correct {
-      background: #dcffd9;
-      border-color: #69d46b;
-      box-shadow: 0 6px 0 #9be895;
+      background: linear-gradient(180deg, #e5fff4, #bfffe3);
+      border-color: #00a86b;
+      box-shadow: 0 7px 0 #087e56;
     }
     .option.wrong {
-      background: #ffe0e0;
-      border-color: #ff7777;
-      box-shadow: 0 6px 0 #ffadad;
+      background: linear-gradient(180deg, #ffe6e6, #ffc7c7);
+      border-color: var(--red);
+      box-shadow: 0 7px 0 #a71928;
     }
     .feedback {
       display: none;
       margin-top: 18px;
       background: #fff9df;
-      border: 3px solid #ffd86b;
-      border-radius: 20px;
+      color: #27324d;
+      border: 3px solid var(--gold);
+      border-left: 10px solid var(--red);
+      border-radius: 18px;
       padding: 16px 18px;
       font-size: 19px;
-      line-height: 1.6;
+      line-height: 1.65;
+      box-shadow: 0 8px 18px rgba(7,21,47,.12);
     }
-    .feedback.show { display: block; }
+    .feedback.show { display: block; animation: pop .18s ease-out; }
+    @keyframes pop { from { transform: scale(.98); opacity: .4; } to { transform: scale(1); opacity: 1; } }
     .next, .restart {
       display: block;
       margin: 22px auto 0;
       border: 0;
       border-radius: 999px;
-      padding: 14px 38px;
+      padding: 14px 40px;
       font-size: 22px;
-      font-weight: 900;
+      font-weight: 1000;
       color: #fff;
-      background: linear-gradient(135deg, #ff6fb7, #73c8ff);
+      background: linear-gradient(135deg, var(--red), var(--case-blue));
       cursor: pointer;
-      box-shadow: 0 8px 0 #c8669d;
+      box-shadow: 0 8px 0 #07152f, 0 0 0 3px var(--gold);
+      transition: transform .15s, filter .15s;
     }
+    .next:hover:not(:disabled), .restart:hover { transform: translateY(-3px); filter: brightness(1.05); }
     .next:disabled { opacity: .45; cursor: not-allowed; }
-    .result { display: none; text-align: center; padding: 26px; }
-    .result h2 { color: #ff4fa3; font-size: 42px; }
-    .result p { font-size: 23px; line-height: 1.7; }
-    .footer { text-align: center; margin-top: 18px; color: #888; font-size: 14px; }
+    .result {
+      display: none;
+      text-align: center;
+      padding: 30px 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .result h2 {
+      color: var(--deep-blue);
+      font-size: clamp(34px, 5vw, 50px);
+      text-shadow: 3px 3px 0 var(--gold);
+    }
+    .result p {
+      font-size: 23px;
+      line-height: 1.7;
+      font-weight: 800;
+    }
+    .footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-top: 18px;
+      color: #44506b;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    @media (max-width: 620px) {
+      .wrap { padding: 20px; border-radius: 22px; }
+      .mascot { font-size: 58px; }
+      .option { font-size: 18px; }
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section id="quiz">
       <div class="hero">
-        <div class="mascot">🧑‍💻🌸🐱</div>
+        <div class="label">🔎 Detective Coding Case</div>
+        <div class="mascot">🕵️‍♂️💻🎀</div>
         <h1>翊華程式設計Github觀念小複習</h1>
-        <div class="subtitle">完成 15 題小挑戰，答錯會看到解答喔！</div>
+        <div class="subtitle">破解 15 題程式線索，答錯會出現解答與偵探提示！</div>
       </div>
       <div class="status">
-        <div class="badge" id="count">第 1 / 15 題</div>
-        <div class="badge" id="score">分數：0</div>
+        <div class="badge" id="count">第 <strong>1</strong> / 15 題</div>
+        <div class="badge" id="score">分數：<strong>0</strong></div>
       </div>
       <div class="question-card">
         <div class="question" id="question"></div>
         <div class="options" id="options"></div>
         <div class="feedback" id="feedback"></div>
       </div>
-      <button class="next" id="next" disabled>下一題 ✨</button>
+      <button class="next" id="next" disabled>下一個案件 ✨</button>
     </section>
     <section class="result" id="result">
-      <div class="mascot">🎉🌈💻</div>
-      <h2>測驗完成！</h2>
+      <div class="mascot">🏆🔎💻</div>
+      <h2>案件破解完成！</h2>
       <p id="finalScore"></p>
       <p id="comment"></p>
-      <button class="restart" onclick="restartQuiz()">重新挑戰</button>
+      <button class="restart" onclick="restartQuiz()">重新辦案</button>
     </section>
-    <div class="footer">翊華程式設計課程｜GitHub × HTML × JavaScript × CSS × PWA</div>
+    <div class="footer">翊華程式設計課程｜GitHub × HTML × JavaScript × CSS × PWA｜Detective Anime Style</div>
   </main>
 
   <script>
@@ -193,11 +313,11 @@
       { q: "PWA 的特色是什麼？", o: ["讓網站更像 App", "只能在電視上用", "不能放圖片"], a: 0, e: "PWA 可以讓網站像 App 一樣被安裝到手機或電腦桌面。" },
       { q: "製作 PWA 常見的重要檔案是？", o: ["manifest.json", "homework.docx", "cat.mp3"], a: 0, e: "manifest.json 可設定 App 名稱、圖示與顯示方式。" },
       { q: "TTS 是什麼意思？", o: ["文字轉語音", "圖片變影片", "滑鼠速度設定"], a: 0, e: "TTS 是 Text To Speech，也就是把文字轉成語音。" },
-      { q: "網頁遊戲中，按鈕點了會計分，通常需要哪一種技術？", o: ["JavaScript", "紙膠帶", "壓縮餅乾"], a: 0, e: "計分、判斷答案與遊戲流程通常用 JavaScript 控制。" },
-      { q: "GitHub 上的一個專案資料夾通常稱為什麼？", o: ["Repository", "Sandwich", "Keyboard"], a: 0, e: "Repository 是儲存庫，可以放網站、遊戲或程式專案。" },
-      { q: "如果 CSS 沒有正確連結，網頁可能會怎樣？", o: ["樣式不見，畫面變普通", "電腦爆炸", "自動變成影片"], a: 0, e: "CSS 沒有載入時，網頁結構還在，但樣式通常會消失。" },
-      { q: "圖片、音效、CSS、JS 路徑錯誤，可能會發生什麼？", o: ["資源無法顯示或播放", "螢幕變大", "滑鼠變成貓"], a: 0, e: "路徑錯誤時，瀏覽器找不到檔案，功能可能失效。" },
-      { q: "作品上傳到 GitHub Pages 後，可以做什麼？", o: ["分享網址給別人觀看", "只能自己看", "一定會變成手機遊戲"], a: 0, e: "發布成功後，就可以把網址分享給老師、同學或家長觀看。" }
+      { q: "如果 index.html 放在 repo 根目錄，但 GitHub Pages 顯示 404，最可能要先檢查什麼？", o: ["Pages 是否啟用，branch 是否選 main/root", "電腦鍵盤是否太髒", "CSS 顏色是否太亮"], a: 0, e: "最後五題難度提高！404 常見原因是 GitHub Pages 尚未啟用、branch 或資料夾設定錯誤，或部署還沒完成。" },
+      { q: "同一個資料夾中有 style.css，HTML 要正確連結它，通常應該寫哪一段？", o: ["<link rel=\"stylesheet\" href=\"style.css\">", "<script src=\"style.css\"></script>", "<img src=\"style.css\">"], a: 0, e: "CSS 要用 link 標籤載入；script 是載入 JavaScript，img 是載入圖片。" },
+      { q: "PWA 想要離線也能開啟部分內容，通常需要搭配哪一種檔案或技術？", o: ["Service Worker", "PowerPoint", "滑鼠右鍵"], a: 0, e: "Service Worker 可以快取網頁資源，讓 PWA 具備離線或加速載入能力。" },
+      { q: "網頁在本機可以顯示圖片，但上傳 GitHub Pages 後圖片破掉，常見原因是什麼？", o: ["檔名大小寫或路徑不一致", "瀏覽器不喜歡圖片", "HTML 一定不能放圖片"], a: 0, e: "GitHub Pages 對檔名大小寫很敏感。cat.png 和 Cat.png 會被視為不同檔案。" },
+      { q: "學生把 JS 寫在 main.js，HTML 中哪一種寫法最合理？", o: ["<script src=\"main.js\"></script>", "<link href=\"main.js\">", "<style src=\"main.js\"></style>"], a: 0, e: "外部 JavaScript 檔案要用 script src 載入。若路徑錯誤，按鈕和遊戲邏輯可能失效。" }
     ];
 
     let current = 0;
@@ -221,8 +341,8 @@
 
       const item = questions[current];
       questionEl.textContent = `${current + 1}. ${item.q}`;
-      countEl.textContent = `第 ${current + 1} / ${questions.length} 題`;
-      scoreEl.textContent = `分數：${points}`;
+      countEl.innerHTML = `第 <strong>${current + 1}</strong> / ${questions.length} 題`;
+      scoreEl.innerHTML = `分數：<strong>${points}</strong>`;
       optionsEl.innerHTML = "";
 
       item.o.forEach((text, index) => {
@@ -248,13 +368,13 @@
 
       if (index === item.a) {
         points += 10;
-        feedbackEl.innerHTML = `<strong>答對了！太棒了 🌟</strong><br>${item.e}`;
+        feedbackEl.innerHTML = `<strong>推理正確！線索吻合 🌟</strong><br>${item.e}`;
       } else {
         button.classList.add("wrong");
-        feedbackEl.innerHTML = `<strong>答錯了，沒關係 💪</strong><br>正確答案是：<strong>${String.fromCharCode(65 + item.a)}. ${item.o[item.a]}</strong><br>解答：${item.e}`;
+        feedbackEl.innerHTML = `<strong>推理失誤，但案件還沒結束 🔎</strong><br>正確答案是：<strong>${String.fromCharCode(65 + item.a)}. ${item.o[item.a]}</strong><br>解答：${item.e}`;
       }
 
-      scoreEl.textContent = `分數：${points}`;
+      scoreEl.innerHTML = `分數：<strong>${points}</strong>`;
       feedbackEl.classList.add("show");
       nextBtn.disabled = false;
     }
@@ -270,9 +390,9 @@
       resultEl.style.display = "block";
       document.getElementById("finalScore").textContent = `你的總分是：${points} / ${questions.length * 10}`;
       const comment = document.getElementById("comment");
-      if (points >= 130) comment.textContent = "太厲害了！你已經是 GitHub 小忍者，可以帥氣發布作品了！";
-      else if (points >= 90) comment.textContent = "表現很好！再複習幾個觀念，就能成為 GitHub 小達人。";
-      else comment.textContent = "沒關係，程式設計就是邊做邊學。再挑戰一次，經驗值會升級！";
+      if (points >= 130) comment.textContent = "完美破案！你已經是 GitHub 發布與網頁除錯小偵探。";
+      else if (points >= 90) comment.textContent = "案件大致破解！再複習路徑、Pages 與 PWA，就能更穩。";
+      else comment.textContent = "線索還有點混亂，重新挑戰一次，下一輪就能抓到關鍵證據。";
     }
 
     function restartQuiz() {
