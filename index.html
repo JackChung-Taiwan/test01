@@ -5,206 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>翊華程式設計Github觀念小複習</title>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Microsoft JhengHei", "Noto Sans TC", Arial, sans-serif;
-      background:
-        radial-gradient(circle at 10% 15%, rgba(255, 215, 75, 0.28), transparent 26%),
-        radial-gradient(circle at 90% 10%, rgba(75, 180, 255, 0.25), transparent 28%),
-        radial-gradient(circle at 80% 85%, rgba(235, 45, 65, 0.18), transparent 32%),
-        linear-gradient(135deg, #050914 0%, #071a3d 45%, #0d3b82 100%);
-      color: #0b1833;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .stage {
-      width: min(980px, 100%);
-      background: linear-gradient(180deg, #f8fbff, #e7f1ff);
-      border: 5px solid #ffd44d;
-      border-radius: 28px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
-      overflow: hidden;
-      position: relative;
-    }
-    .top-bar {
-      background: linear-gradient(135deg, #071a3d, #123f8d);
-      color: white;
-      padding: 22px 24px;
-      border-bottom: 5px solid #e9364b;
-      position: relative;
-    }
-    .top-bar::after {
-      content: "CASE";
-      position: absolute;
-      right: 24px;
-      top: 12px;
-      font-size: 54px;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.08);
-      letter-spacing: 8px;
-    }
-    .tag {
-      display: inline-block;
-      background: #ffd44d;
-      color: #071a3d;
-      border-radius: 999px;
-      padding: 7px 16px;
-      font-weight: 900;
-      margin-bottom: 10px;
-      box-shadow: 0 4px 0 #b78918;
-    }
-    h1 {
-      margin: 8px 0;
-      font-size: clamp(30px, 5vw, 50px);
-      line-height: 1.15;
-      color: #ffffff;
-      text-shadow: 3px 3px 0 #e9364b, 5px 5px 0 rgba(0, 0, 0, 0.25);
-    }
-    .intro {
-      font-size: 18px;
-      line-height: 1.6;
-      color: #dcecff;
-      font-weight: 700;
-      max-width: 720px;
-    }
-    .content { padding: 26px; position: relative; }
-    .mascot {
-      position: absolute;
-      right: 22px;
-      top: -34px;
-      width: 110px;
-      height: 110px;
-      background: #ffffff;
-      border: 4px solid #ffd44d;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 56px;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
-    }
-    .status {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-      padding-right: 130px;
-    }
-    .pill {
-      background: #071a3d;
-      color: white;
-      border: 2px solid #4fc3ff;
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-weight: 900;
-      box-shadow: 0 5px 0 rgba(0, 0, 0, 0.25);
-    }
-    .pill span { color: #ffd44d; }
-    .card {
-      background: white;
-      border: 4px solid #123f8d;
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: inset 0 0 0 4px rgba(255, 212, 77, 0.32), 0 14px 25px rgba(10, 33, 77, 0.18);
-    }
-    .case-title {
-      display: inline-block;
-      background: #e9364b;
-      color: white;
-      padding: 7px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      margin-bottom: 14px;
-      box-shadow: 0 4px 0 #991a27;
-    }
-    .question {
-      font-size: clamp(22px, 3vw, 31px);
-      font-weight: 900;
-      line-height: 1.5;
-      color: #071a3d;
-      margin-bottom: 18px;
-    }
-    .options { display: grid; gap: 14px; }
-    .option {
-      width: 100%;
-      border: 3px solid #123f8d;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #ffffff, #eaf3ff);
-      color: #071a3d;
-      padding: 16px 18px;
-      font-size: 20px;
-      font-weight: 900;
-      text-align: left;
-      cursor: pointer;
-      box-shadow: 0 7px 0 #0a2554;
-      transition: transform 0.15s, filter 0.15s;
-      line-height: 1.45;
-    }
-    .option:hover:not(:disabled) { transform: translateY(-3px); filter: brightness(1.05); }
-    .option:disabled { cursor: not-allowed; }
-    .option.correct {
-      background: linear-gradient(180deg, #e4fff4, #b9ffe1);
-      border-color: #00a86b;
-      box-shadow: 0 7px 0 #06784f;
-    }
-    .option.wrong {
-      background: linear-gradient(180deg, #ffe6e6, #ffc5c5);
-      border-color: #e9364b;
-      box-shadow: 0 7px 0 #991a27;
-    }
-    .feedback {
-      display: none;
-      margin-top: 18px;
-      background: #fff8d8;
-      border: 3px solid #ffd44d;
-      border-left: 10px solid #e9364b;
-      border-radius: 18px;
-      padding: 16px 18px;
-      font-size: 19px;
-      line-height: 1.65;
-      color: #17213d;
-      font-weight: 700;
-    }
-    .feedback.show { display: block; }
-    .next, .restart {
-      display: block;
-      margin: 22px auto 0;
-      border: 0;
-      border-radius: 999px;
-      padding: 14px 42px;
-      font-size: 22px;
-      font-weight: 900;
-      color: white;
-      background: linear-gradient(135deg, #e9364b, #123f8d);
-      box-shadow: 0 8px 0 #071a3d, 0 0 0 3px #ffd44d;
-      cursor: pointer;
-    }
-    .next:disabled { opacity: 0.45; cursor: not-allowed; }
-    .result { display: none; text-align: center; padding: 20px; }
-    .result-icon { font-size: 76px; }
-    .result h2 {
-      font-size: clamp(34px, 5vw, 50px);
-      color: #071a3d;
-      text-shadow: 3px 3px 0 #ffd44d;
-    }
-    .result p { font-size: 23px; line-height: 1.7; font-weight: 800; }
-    .footer {
-      text-align: center;
-      padding: 16px 20px 22px;
-      color: #46546f;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    @media (max-width: 640px) {
-      .content { padding: 20px; }
-      .mascot { position: static; margin: -4px auto 16px; }
-      .status { padding-right: 0; }
-      .option { font-size: 18px; }
-    }
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;background:radial-gradient(circle at 10% 15%,rgba(255,215,75,.28),transparent 26%),radial-gradient(circle at 90% 10%,rgba(75,180,255,.25),transparent 28%),radial-gradient(circle at 80% 85%,rgba(235,45,65,.18),transparent 32%),linear-gradient(135deg,#050914 0%,#071a3d 45%,#0d3b82 100%);color:#0b1833;display:flex;align-items:center;justify-content:center;padding:20px}.stage{width:min(980px,100%);background:linear-gradient(180deg,#f8fbff,#e7f1ff);border:5px solid #ffd44d;border-radius:28px;box-shadow:0 25px 70px rgba(0,0,0,.35);overflow:hidden;position:relative}.top-bar{background:linear-gradient(135deg,#071a3d,#123f8d);color:#fff;padding:22px 24px;border-bottom:5px solid #e9364b;position:relative}.top-bar:after{content:"CASE";position:absolute;right:24px;top:12px;font-size:54px;font-weight:900;color:rgba(255,255,255,.08);letter-spacing:8px}.tag{display:inline-block;background:#ffd44d;color:#071a3d;border-radius:999px;padding:7px 16px;font-weight:900;margin-bottom:10px;box-shadow:0 4px 0 #b78918}h1{margin:8px 0;font-size:clamp(30px,5vw,50px);line-height:1.15;color:#fff;text-shadow:3px 3px 0 #e9364b,5px 5px 0 rgba(0,0,0,.25)}.intro{font-size:18px;line-height:1.6;color:#dcecff;font-weight:700;max-width:760px}.content{padding:26px;position:relative}.mascot{position:absolute;right:22px;top:-34px;width:110px;height:110px;background:#fff;border:4px solid #ffd44d;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;box-shadow:0 12px 24px rgba(0,0,0,.22)}.status{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;padding-right:130px}.pill{background:#071a3d;color:#fff;border:2px solid #4fc3ff;border-radius:999px;padding:10px 18px;font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.25)}.pill span{color:#ffd44d}.card{background:#fff;border:4px solid #123f8d;border-radius:22px;padding:24px;box-shadow:inset 0 0 0 4px rgba(255,212,77,.32),0 14px 25px rgba(10,33,77,.18)}.case-title{display:inline-block;background:#e9364b;color:#fff;padding:7px 16px;border-radius:999px;font-weight:900;margin-bottom:14px;box-shadow:0 4px 0 #991a27}.question{font-size:clamp(22px,3vw,31px);font-weight:900;line-height:1.5;color:#071a3d;margin-bottom:18px}.options{display:grid;gap:14px}.option{width:100%;border:3px solid #123f8d;border-radius:18px;background:linear-gradient(180deg,#fff,#eaf3ff);color:#071a3d;padding:16px 18px;font-size:20px;font-weight:900;text-align:left;cursor:pointer;box-shadow:0 7px 0 #0a2554;transition:transform .15s,filter .15s;line-height:1.45}.option:hover:not(:disabled){transform:translateY(-3px);filter:brightness(1.05)}.option:disabled{cursor:not-allowed}.option.correct{background:linear-gradient(180deg,#e4fff4,#b9ffe1);border-color:#00a86b;box-shadow:0 7px 0 #06784f}.option.wrong{background:linear-gradient(180deg,#ffe6e6,#ffc5c5);border-color:#e9364b;box-shadow:0 7px 0 #991a27}.feedback{display:none;margin-top:18px;background:#fff8d8;border:3px solid #ffd44d;border-left:10px solid #e9364b;border-radius:18px;padding:16px 18px;font-size:19px;line-height:1.65;color:#17213d;font-weight:700}.feedback.show{display:block}.next,.restart{display:block;margin:22px auto 0;border:0;border-radius:999px;padding:14px 42px;font-size:22px;font-weight:900;color:#fff;background:linear-gradient(135deg,#e9364b,#123f8d);box-shadow:0 8px 0 #071a3d,0 0 0 3px #ffd44d;cursor:pointer}.next:disabled{opacity:.45;cursor:not-allowed}.result{display:none;text-align:center;padding:20px}.result-icon{font-size:76px}.result h2{font-size:clamp(34px,5vw,50px);color:#071a3d;text-shadow:3px 3px 0 #ffd44d}.result p{font-size:23px;line-height:1.7;font-weight:800}.footer{text-align:center;padding:16px 20px 22px;color:#46546f;font-size:14px;font-weight:700}@media(max-width:640px){.content{padding:20px}.mascot{position:static;margin:-4px auto 16px}.status{padding-right:0}.option{font-size:18px}}
   </style>
 </head>
 <body>
@@ -212,7 +13,7 @@
     <header class="top-bar">
       <div class="tag">Detective Coding Quiz</div>
       <h1>翊華程式設計Github觀念小複習</h1>
-      <div class="intro">化身程式小偵探，破解 GitHub、HTML、CSS、JavaScript 與 PWA 的 15 個案件。最後 5 題難度提升，答錯也會出現解答。</div>
+      <div class="intro">化身程式小偵探，破解 GitHub、HTML、CSS、JavaScript 與 PWA 的 15 個案件。每次開啟頁面，選項順序都會重新洗牌。</div>
     </header>
 
     <section class="content" id="quizArea">
@@ -278,6 +79,17 @@
 
     totalNumber.textContent = questions.length;
 
+    function shuffleArray(array) {
+      const copy = array.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = temp;
+      }
+      return copy;
+    }
+
     function loadQuestion() {
       answered = false;
       nextButton.disabled = true;
@@ -286,35 +98,48 @@
       optionBox.innerHTML = "";
 
       const item = questions[currentIndex];
+      const correctText = item.o[item.a];
+      const shuffledOptions = shuffleArray(item.o.map(function(optionText, index) {
+        return { text: optionText, isCorrect: index === item.a };
+      }));
+
       questionNumber.textContent = currentIndex + 1;
       scoreNumber.textContent = score;
       questionText.textContent = item.q;
 
-      item.o.forEach(function(optionText, index) {
+      shuffledOptions.forEach(function(option, index) {
         const button = document.createElement("button");
         button.className = "option";
-        button.textContent = String.fromCharCode(65 + index) + ". " + optionText;
-        button.addEventListener("click", function() { checkAnswer(index, button); });
+        button.textContent = String.fromCharCode(65 + index) + ". " + option.text;
+        button.dataset.correct = option.isCorrect ? "true" : "false";
+        button.addEventListener("click", function() {
+          checkAnswer(option.isCorrect, button, correctText);
+        });
         optionBox.appendChild(button);
       });
     }
 
-    function checkAnswer(selectedIndex, selectedButton) {
+    function checkAnswer(isCorrect, selectedButton, correctText) {
       if (answered) return;
       answered = true;
       const item = questions[currentIndex];
       const buttons = document.querySelectorAll(".option");
+      let correctLetter = "";
+
       buttons.forEach(function(button, index) {
         button.disabled = true;
-        if (index === item.a) button.classList.add("correct");
+        if (button.dataset.correct === "true") {
+          button.classList.add("correct");
+          correctLetter = String.fromCharCode(65 + index);
+        }
       });
 
-      if (selectedIndex === item.a) {
+      if (isCorrect) {
         score += 10;
         feedbackBox.innerHTML = "<strong>推理正確！</strong><br>" + item.e;
       } else {
         selectedButton.classList.add("wrong");
-        feedbackBox.innerHTML = "<strong>推理失誤，但案件還沒結束。</strong><br>正確答案是：<strong>" + String.fromCharCode(65 + item.a) + ". " + item.o[item.a] + "</strong><br>解答：" + item.e;
+        feedbackBox.innerHTML = "<strong>推理失誤，但案件還沒結束。</strong><br>正確答案是：<strong>" + correctLetter + ". " + correctText + "</strong><br>解答：" + item.e;
       }
       scoreNumber.textContent = score;
       feedbackBox.classList.add("show");
