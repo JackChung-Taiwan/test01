@@ -1,46 +1,342 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>翊華程式設計Github觀念小複習</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>翊華程式設計 GitHub 動態小複習</title>
   <style>
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;background:radial-gradient(circle at 10% 15%,rgba(255,215,75,.28),transparent 26%),radial-gradient(circle at 90% 10%,rgba(75,180,255,.25),transparent 28%),radial-gradient(circle at 80% 85%,rgba(235,45,65,.18),transparent 32%),linear-gradient(135deg,#050914 0%,#071a3d 45%,#0d3b82 100%);color:#0b1833;display:flex;align-items:center;justify-content:center;padding:20px}.stage{width:min(980px,100%);background:linear-gradient(180deg,#f8fbff,#e7f1ff);border:5px solid #ffd44d;border-radius:28px;box-shadow:0 25px 70px rgba(0,0,0,.35);overflow:hidden;position:relative}.top-bar{background:linear-gradient(135deg,#071a3d,#123f8d);color:#fff;padding:22px 24px;border-bottom:5px solid #e9364b;position:relative}.top-bar:after{content:"CASE";position:absolute;right:24px;top:12px;font-size:54px;font-weight:900;color:rgba(255,255,255,.08);letter-spacing:8px}.tag{display:inline-block;background:#ffd44d;color:#071a3d;border-radius:999px;padding:7px 16px;font-weight:900;margin-bottom:10px;box-shadow:0 4px 0 #b78918}h1{margin:8px 0;font-size:clamp(30px,5vw,50px);line-height:1.15;color:#fff;text-shadow:3px 3px 0 #e9364b,5px 5px 0 rgba(0,0,0,.25)}.intro{font-size:18px;line-height:1.6;color:#dcecff;font-weight:700;max-width:760px}.content{padding:26px;position:relative}.mascot{position:absolute;right:22px;top:-34px;width:110px;height:110px;background:#fff;border:4px solid #ffd44d;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;box-shadow:0 12px 24px rgba(0,0,0,.22)}.status{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;padding-right:130px}.pill{background:#071a3d;color:#fff;border:2px solid #4fc3ff;border-radius:999px;padding:10px 18px;font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.25)}.pill span{color:#ffd44d}.card{background:#fff;border:4px solid #123f8d;border-radius:22px;padding:24px;box-shadow:inset 0 0 0 4px rgba(255,212,77,.32),0 14px 25px rgba(10,33,77,.18)}.case-title{display:inline-block;background:#e9364b;color:#fff;padding:7px 16px;border-radius:999px;font-weight:900;margin-bottom:14px;box-shadow:0 4px 0 #991a27}.question{font-size:clamp(22px,3vw,31px);font-weight:900;line-height:1.5;color:#071a3d;margin-bottom:18px}.options{display:grid;gap:14px}.option{width:100%;border:3px solid #123f8d;border-radius:18px;background:linear-gradient(180deg,#fff,#eaf3ff);color:#071a3d;padding:16px 18px;font-size:20px;font-weight:900;text-align:left;cursor:pointer;box-shadow:0 7px 0 #0a2554;transition:transform .15s,filter .15s;line-height:1.45}.option:hover:not(:disabled){transform:translateY(-3px);filter:brightness(1.05)}.option:disabled{cursor:not-allowed}.option.correct{background:linear-gradient(180deg,#e4fff4,#b9ffe1);border-color:#00a86b;box-shadow:0 7px 0 #06784f}.option.wrong{background:linear-gradient(180deg,#ffe6e6,#ffc5c5);border-color:#e9364b;box-shadow:0 7px 0 #991a27}.feedback{display:none;margin-top:18px;background:#fff8d8;border:3px solid #ffd44d;border-left:10px solid #e9364b;border-radius:18px;padding:16px 18px;font-size:19px;line-height:1.65;color:#17213d;font-weight:700}.feedback.show{display:block}.next,.restart{display:block;margin:22px auto 0;border:0;border-radius:999px;padding:14px 42px;font-size:22px;font-weight:900;color:#fff;background:linear-gradient(135deg,#e9364b,#123f8d);box-shadow:0 8px 0 #071a3d,0 0 0 3px #ffd44d;cursor:pointer}.next:disabled{opacity:.45;cursor:not-allowed}.result{display:none;text-align:center;padding:20px}.result-icon{font-size:76px}.result h2{font-size:clamp(34px,5vw,50px);color:#071a3d;text-shadow:3px 3px 0 #ffd44d}.result p{font-size:23px;line-height:1.7;font-weight:800}.footer{text-align:center;padding:16px 20px 22px;color:#46546f;font-size:14px;font-weight:700}@media(max-width:640px){.content{padding:20px}.mascot{position:static;margin:-4px auto 16px}.status{padding-right:0}.option{font-size:18px}}
+    :root{
+      --bg1:#050712;
+      --bg2:#071b3d;
+      --cyan:#35e6ff;
+      --green:#51ff9c;
+      --orange:#ffb347;
+      --pink:#ff4fd8;
+      --text:#f4fbff;
+      --muted:#b9c9e8;
+      --glass:rgba(255,255,255,.11);
+      --line:rgba(255,255,255,.22);
+      --shadow:0 30px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%,rgba(53,230,255,.22),transparent 26%),
+        radial-gradient(circle at 84% 12%,rgba(255,79,216,.2),transparent 25%),
+        radial-gradient(circle at 70% 86%,rgba(81,255,156,.16),transparent 30%),
+        linear-gradient(135deg,var(--bg1),var(--bg2) 55%,#120926);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 90%);
+      z-index:-3;
+    }
+
+    canvas#particles{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+    }
+
+    .orb{
+      position:fixed;
+      width:360px;
+      height:360px;
+      border-radius:50%;
+      filter:blur(38px);
+      opacity:.42;
+      z-index:-1;
+      animation:floatOrb 9s ease-in-out infinite alternate;
+    }
+    .orb.one{left:-120px;top:18%;background:var(--cyan)}
+    .orb.two{right:-140px;bottom:10%;background:var(--pink);animation-delay:1.2s}
+    .orb.three{left:48%;top:-190px;background:var(--green);animation-delay:2.1s}
+    @keyframes floatOrb{to{transform:translate3d(45px,-35px,0) scale(1.08)}}
+
+    .wrap{
+      width:min(1120px,calc(100% - 34px));
+      margin:0 auto;
+      padding:34px 0 42px;
+    }
+
+    .hero{
+      min-height:38vh;
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:22px;
+      align-items:center;
+      padding:36px 0 26px;
+    }
+
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      border:1px solid rgba(53,230,255,.5);
+      background:rgba(53,230,255,.1);
+      color:#dffbff;
+      border-radius:999px;
+      padding:9px 15px;
+      font-weight:900;
+      letter-spacing:.5px;
+      box-shadow:0 0 26px rgba(53,230,255,.2);
+    }
+
+    h1{
+      margin:18px 0 12px;
+      font-size:clamp(34px,6vw,74px);
+      line-height:1.05;
+      letter-spacing:-1.5px;
+    }
+
+    .gradient-text{
+      background:linear-gradient(90deg,#fff,var(--cyan),var(--green),var(--orange));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:0 0 35px rgba(53,230,255,.22);
+    }
+
+    .intro{
+      color:var(--muted);
+      font-size:clamp(16px,2.1vw,21px);
+      line-height:1.75;
+      max-width:760px;
+      margin:0 0 20px;
+      font-weight:700;
+    }
+
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+    .btn{
+      border:0;
+      border-radius:999px;
+      padding:14px 23px;
+      color:#06111f;
+      background:linear-gradient(135deg,var(--cyan),var(--green));
+      font-weight:1000;
+      font-size:17px;
+      cursor:pointer;
+      text-decoration:none;
+      box-shadow:0 14px 35px rgba(53,230,255,.22), inset 0 0 0 1px rgba(255,255,255,.45);
+      transition:.22s ease;
+    }
+    .btn:hover{transform:translateY(-3px) scale(1.02)}
+    .btn.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--line)}
+
+    .holo-card{
+      position:relative;
+      min-height:260px;
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.06));
+      box-shadow:var(--shadow), inset 0 0 35px rgba(255,255,255,.06);
+      backdrop-filter:blur(18px);
+      overflow:hidden;
+      transform-style:preserve-3d;
+      animation:cardFloat 4s ease-in-out infinite alternate;
+    }
+    @keyframes cardFloat{to{transform:translateY(-10px) rotateX(2deg) rotateY(-3deg)}}
+    .holo-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:conic-gradient(from 180deg,var(--cyan),var(--pink),var(--green),var(--orange),var(--cyan));
+      opacity:.38;
+      filter:blur(20px);
+    }
+    .holo-inner{position:relative;padding:28px;height:100%;display:grid;place-items:center;text-align:center}
+    .code-icon{font-size:76px;filter:drop-shadow(0 0 22px rgba(53,230,255,.7));animation:pulse 1.7s infinite alternate}
+    @keyframes pulse{to{transform:scale(1.08);filter:drop-shadow(0 0 34px rgba(81,255,156,.85))}}
+    .scanline{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);top:18%;animation:scan 3s linear infinite;opacity:.8}
+    @keyframes scan{to{top:88%}}
+    .mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-top:24px}
+    .mini-stats div{border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(0,0,0,.18);font-weight:900;color:#dffbff}
+    .mini-stats b{display:block;font-size:24px;color:var(--green)}
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:32px;
+      background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.07));
+      backdrop-filter:blur(18px);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .toolbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:12px;
+      padding:18px 20px;
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border:1px solid rgba(53,230,255,.45);
+      border-radius:999px;
+      background:rgba(53,230,255,.08);
+      color:#eaffff;
+      font-weight:900;
+    }
+    .pill span{color:var(--orange)}
+
+    .quiz-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:0}
+    .side{
+      padding:26px;
+      border-right:1px solid var(--line);
+      background:rgba(0,0,0,.12);
+    }
+    .side h2{margin:0 0 12px;font-size:30px}
+    .side p{color:var(--muted);line-height:1.7;font-weight:700}
+    .progress-shell{height:14px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;border:1px solid var(--line);margin:20px 0}
+    .progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--green),var(--orange));box-shadow:0 0 18px rgba(53,230,255,.8);transition:.45s}
+    .skill-grid{display:grid;gap:10px;margin-top:18px}
+    .skill{display:flex;justify-content:space-between;gap:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-weight:900;color:#eaf7ff}
+
+    .quiz{padding:28px}
+    .case-title{display:inline-block;margin-bottom:14px;color:#07111e;background:linear-gradient(135deg,var(--orange),#fff069);padding:8px 15px;border-radius:999px;font-weight:1000;box-shadow:0 0 24px rgba(255,179,71,.32)}
+    .question{font-size:clamp(23px,3vw,34px);font-weight:1000;line-height:1.48;margin-bottom:22px;text-shadow:0 0 20px rgba(53,230,255,.2)}
+    .options{display:grid;gap:14px}
+    .option{
+      width:100%;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:22px;
+      background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.07));
+      color:#f8fdff;
+      padding:17px 18px;
+      font-size:19px;
+      font-weight:900;
+      text-align:left;
+      cursor:pointer;
+      transition:.2s ease;
+      box-shadow:0 12px 28px rgba(0,0,0,.2);
+    }
+    .option:hover:not(:disabled){transform:translateX(8px);border-color:rgba(53,230,255,.9);box-shadow:0 0 28px rgba(53,230,255,.2)}
+    .option:disabled{cursor:not-allowed}
+    .option.correct{background:linear-gradient(135deg,rgba(81,255,156,.35),rgba(53,230,255,.16));border-color:rgba(81,255,156,.9)}
+    .option.wrong{background:linear-gradient(135deg,rgba(255,79,216,.32),rgba(255,70,70,.15));border-color:rgba(255,79,216,.9)}
+
+    .feedback{display:none;margin-top:18px;border:1px solid rgba(255,179,71,.55);border-left:8px solid var(--orange);border-radius:22px;padding:16px 18px;background:rgba(255,179,71,.1);color:#fff8e8;font-size:18px;line-height:1.65;font-weight:800}
+    .feedback.show{display:block;animation:pop .25s ease}
+    @keyframes pop{from{transform:scale(.98);opacity:0}to{transform:scale(1);opacity:1}}
+    .next,.restart{margin:22px auto 0;display:block}
+    .next:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+    .result{display:none;text-align:center;padding:46px 24px}
+    .result-icon{font-size:82px;filter:drop-shadow(0 0 28px rgba(53,230,255,.6))}
+    .result h2{font-size:clamp(34px,5vw,56px);margin:12px 0;background:linear-gradient(90deg,var(--cyan),var(--green),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .result p{font-size:22px;line-height:1.7;font-weight:900;color:#e9f7ff}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .feature{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.08);padding:20px;transition:.25s;min-height:130px}
+    .feature:hover{transform:translateY(-7px);box-shadow:0 0 32px rgba(53,230,255,.17);border-color:rgba(53,230,255,.7)}
+    .feature b{font-size:20px;color:#fff}.feature p{color:var(--muted);font-weight:700;line-height:1.6}
+
+    footer{text-align:center;color:#aebbd7;font-weight:800;padding:28px 0 6px}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:.65s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    @media(max-width:860px){.hero,.quiz-layout{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid var(--line)}.features{grid-template-columns:1fr}.holo-card{min-height:220px}}
+    @media(max-width:560px){.wrap{width:min(100% - 22px,1120px);padding-top:20px}.hero{padding-top:18px}.toolbar{align-items:flex-start}.option{font-size:17px}.quiz,.side{padding:20px}.mini-stats{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <main class="stage">
-    <header class="top-bar">
-      <div class="tag">Detective Coding Quiz</div>
-      <h1>翊華程式設計Github觀念小複習</h1>
-      <div class="intro">化身程式小偵探，破解 GitHub、HTML、CSS、JavaScript 與 PWA 的 15 個案件。每次開啟頁面，選項順序都會重新洗牌。</div>
-    </header>
+  <canvas id="particles"></canvas>
+  <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
 
-    <section class="content" id="quizArea">
-      <div class="mascot">🔎</div>
-      <div class="status">
+  <div class="wrap">
+    <section class="hero reveal">
+      <div>
+        <div class="badge">⚡ Dynamic GitHub Pages</div>
+        <h1><span class="gradient-text">翊華程式設計</span><br>GitHub 觀念小複習</h1>
+        <p class="intro">化身程式小偵探，破解 GitHub、HTML、CSS、JavaScript 與 PWA 的核心觀念。頁面加入粒子背景、霓虹光暈、玻璃卡片與互動動畫，適合作為課程展示與 GitHub Pages 範例。</p>
+        <div class="hero-actions">
+          <a class="btn" href="#quizPanel">開始挑戰</a>
+          <a class="btn secondary" href="https://github.com/JackChung-Taiwan/test01" target="_blank" rel="noopener">查看 GitHub</a>
+        </div>
+      </div>
+      <div class="holo-card" aria-hidden="true">
+        <div class="scanline"></div>
+        <div class="holo-inner">
+          <div>
+            <div class="code-icon">💻🔎</div>
+            <div class="mini-stats">
+              <div><b>15</b>題目</div>
+              <div><b>AI</b>科技感</div>
+              <div><b>RWD</b>響應式</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel reveal" id="quizPanel">
+      <div class="toolbar">
         <div class="pill">案件 <span id="questionNumber">1</span> / <span id="totalNumber">15</span></div>
-        <div class="pill">分數 <span id="scoreNumber">0</span></div>
+        <div class="pill">目前分數 <span id="scoreNumber">0</span></div>
+        <div class="pill">完成度 <span id="percentNumber">0%</span></div>
       </div>
-      <div class="card">
-        <div class="case-title">程式案件線索</div>
-        <div class="question" id="questionText"></div>
-        <div class="options" id="optionBox"></div>
-        <div class="feedback" id="feedbackBox"></div>
+
+      <div class="quiz-layout" id="quizArea">
+        <aside class="side">
+          <h2>任務控制台</h2>
+          <p>選出正確答案後會立即顯示解析。答題順序固定，選項每次重新排列，適合課堂互動、複習測驗與學生作品展示。</p>
+          <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
+          <div class="skill-grid">
+            <div class="skill"><span>HTML 結構</span><span>✓</span></div>
+            <div class="skill"><span>CSS 動畫</span><span>✓</span></div>
+            <div class="skill"><span>JavaScript 互動</span><span>✓</span></div>
+            <div class="skill"><span>GitHub Pages</span><span>✓</span></div>
+          </div>
+        </aside>
+
+        <main class="quiz">
+          <div class="case-title">程式案件線索</div>
+          <div class="question" id="questionText"></div>
+          <div class="options" id="optionBox"></div>
+          <div class="feedback" id="feedbackBox"></div>
+          <button class="btn next" id="nextButton" disabled>下一個案件</button>
+        </main>
       </div>
-      <button class="next" id="nextButton" disabled>下一個案件</button>
+
+      <section class="result" id="resultArea">
+        <div class="result-icon">🏆✨💻</div>
+        <h2>案件破解完成！</h2>
+        <p id="finalScore"></p>
+        <p id="finalComment"></p>
+        <button class="btn restart" onclick="restartQuiz()">重新挑戰</button>
+      </section>
     </section>
 
-    <section class="result" id="resultArea">
-      <div class="result-icon">🏆🔎💻</div>
-      <h2>案件破解完成！</h2>
-      <p id="finalScore"></p>
-      <p id="finalComment"></p>
-      <button class="restart" onclick="restartQuiz()">重新辦案</button>
+    <section class="features reveal">
+      <div class="feature"><b>粒子互動背景</b><p>滑鼠與觸控移動時，背景粒子會產生科技感連線效果。</p></div>
+      <div class="feature"><b>玻璃擬態卡片</b><p>使用半透明模糊、光暈與漸層，讓 GitHub Pages 看起來更有層次。</p></div>
+      <div class="feature"><b>單檔可部署</b><p>HTML、CSS、JavaScript 全部整合在 index.html，直接上傳即可展示。</p></div>
     </section>
 
-    <div class="footer">翊華程式設計課程｜GitHub Pages｜HTML｜CSS｜JavaScript｜PWA</div>
-  </main>
+    <footer>翊華程式設計課程｜GitHub Pages｜HTML｜CSS｜JavaScript｜PWA</footer>
+  </div>
 
   <script>
     const questions = [
@@ -54,11 +350,11 @@
       { q: "PWA 的特色是什麼？", o: ["讓網站更像 App", "只能用在電視", "完全不能放圖片"], a: 0, e: "PWA 可以讓網站看起來更像 App，部分情況還能安裝到手機桌面。" },
       { q: "製作 PWA 常見的重要設定檔是什麼？", o: ["manifest.json", "homework.docx", "music.mp3"], a: 0, e: "manifest.json 可以設定 App 名稱、圖示、啟動畫面與顯示方式。" },
       { q: "TTS 是什麼意思？", o: ["文字轉語音", "圖片轉表格", "滑鼠速度測試"], a: 0, e: "TTS 是 Text To Speech，也就是把文字轉成語音。" },
-      { q: "難題 1：index.html 已經放在 repo 根目錄，但 GitHub Pages 顯示 404，最應該先檢查什麼？", o: ["Pages 是否啟用，branch 是否選 main 和 root", "螢幕亮度是否太低", "CSS 顏色是否太深"], a: 0, e: "404 常見原因是 Pages 沒啟用、branch 選錯、資料夾不是 root，或部署還沒完成。" },
-      { q: "難題 2：要把 GitHub 專案發布成網站，正確設定流程是哪一個？", o: ["到 Settings 的 Pages，Source 選 Deploy from a branch，Branch 選 main，資料夾選 root，最後按 Save", "到 Issues 留言 main save，網站就會自動出現", "把 repo 名稱改成 Pages-main-save，就會自動發布"], a: 0, e: "發布 GitHub Pages 時，常見流程是 Settings → Pages → Deploy from a branch → Branch 選 main → folder 選 root → Save。學生最容易忘記最後按 Save。" },
-      { q: "難題 3：PWA 想支援離線快取，通常需要哪一種技術？", o: ["Service Worker", "PowerPoint", "鍵盤快捷鍵"], a: 0, e: "Service Worker 可以幫網頁快取資源，讓 PWA 有機會支援離線開啟。" },
-      { q: "難題 4：本機圖片正常，上傳 GitHub Pages 後破圖，常見原因是什麼？", o: ["檔名大小寫或路徑不一致", "HTML 一定不能放圖片", "圖片太可愛所以被擋住"], a: 0, e: "GitHub Pages 對大小寫敏感。cat.png 和 Cat.png 是不同檔案，路徑也要完全正確。" },
-      { q: "難題 5：main.js 是外部 JavaScript 檔案，HTML 應該如何載入？", o: ["使用 script 標籤，src 指向 main.js", "使用 link 標籤，href 指向 main.js", "使用 h1 標籤顯示 main.js"], a: 0, e: "外部 JavaScript 要用 script 標籤載入，src 寫 main.js。路徑錯誤時互動功能可能失效。" }
+      { q: "index.html 已經放在 repo 根目錄，但 GitHub Pages 顯示 404，最應該先檢查什麼？", o: ["Pages 是否啟用，branch 是否選 main 和 root", "螢幕亮度是否太低", "CSS 顏色是否太深"], a: 0, e: "404 常見原因是 Pages 沒啟用、branch 選錯、資料夾不是 root，或部署還沒完成。" },
+      { q: "要把 GitHub 專案發布成網站，正確設定流程是哪一個？", o: ["到 Settings 的 Pages，Source 選 Deploy from a branch，Branch 選 main，資料夾選 root，最後按 Save", "到 Issues 留言 main save，網站就會自動出現", "把 repo 名稱改成 Pages-main-save，就會自動發布"], a: 0, e: "發布 GitHub Pages 時，常見流程是 Settings → Pages → Deploy from a branch → Branch 選 main → folder 選 root → Save。" },
+      { q: "PWA 想支援離線快取，通常需要哪一種技術？", o: ["Service Worker", "PowerPoint", "鍵盤快捷鍵"], a: 0, e: "Service Worker 可以幫網頁快取資源，讓 PWA 有機會支援離線開啟。" },
+      { q: "本機圖片正常，上傳 GitHub Pages 後破圖，常見原因是什麼？", o: ["檔名大小寫或路徑不一致", "HTML 一定不能放圖片", "圖片太可愛所以被擋住"], a: 0, e: "GitHub Pages 對大小寫敏感。cat.png 和 Cat.png 是不同檔案，路徑也要完全正確。" },
+      { q: "main.js 是外部 JavaScript 檔案，HTML 應該如何載入？", o: ["使用 script 標籤，src 指向 main.js", "使用 link 標籤，href 指向 main.js", "使用 h1 標籤顯示 main.js"], a: 0, e: "外部 JavaScript 要用 script 標籤載入，src 寫 main.js。路徑錯誤時互動功能可能失效。" }
     ];
 
     let currentIndex = 0;
@@ -68,6 +364,8 @@
     const questionNumber = document.getElementById("questionNumber");
     const totalNumber = document.getElementById("totalNumber");
     const scoreNumber = document.getElementById("scoreNumber");
+    const percentNumber = document.getElementById("percentNumber");
+    const progressBar = document.getElementById("progressBar");
     const questionText = document.getElementById("questionText");
     const optionBox = document.getElementById("optionBox");
     const feedbackBox = document.getElementById("feedbackBox");
@@ -79,96 +377,185 @@
 
     totalNumber.textContent = questions.length;
 
-    function shuffleArray(array) {
+    function shuffleArray(array){
       const copy = array.slice();
-      for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = copy[i];
-        copy[i] = copy[j];
-        copy[j] = temp;
+      for(let i=copy.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [copy[i],copy[j]]=[copy[j],copy[i]];
       }
       return copy;
     }
 
-    function loadQuestion() {
+    function updateProgress(){
+      const percent = Math.round((currentIndex / questions.length) * 100);
+      percentNumber.textContent = percent + "%";
+      progressBar.style.width = percent + "%";
+    }
+
+    function loadQuestion(){
       answered = false;
       nextButton.disabled = true;
-      feedbackBox.classList.remove("show");
+      feedbackBox.className = "feedback";
       feedbackBox.textContent = "";
       optionBox.innerHTML = "";
 
       const item = questions[currentIndex];
-      const correctText = item.o[item.a];
-      const shuffledOptions = shuffleArray(item.o.map(function(optionText, index) {
-        return { text: optionText, isCorrect: index === item.a };
-      }));
-
       questionNumber.textContent = currentIndex + 1;
       scoreNumber.textContent = score;
       questionText.textContent = item.q;
+      updateProgress();
 
-      shuffledOptions.forEach(function(option, index) {
-        const button = document.createElement("button");
-        button.className = "option";
-        button.textContent = String.fromCharCode(65 + index) + ". " + option.text;
-        button.dataset.correct = option.isCorrect ? "true" : "false";
-        button.addEventListener("click", function() {
-          checkAnswer(option.isCorrect, button, correctText);
-        });
-        optionBox.appendChild(button);
+      const shuffled = shuffleArray(item.o.map((text,index)=>({text,index})));
+      shuffled.forEach(opt=>{
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt.text;
+        btn.onclick = () => chooseAnswer(btn,opt.index,item);
+        optionBox.appendChild(btn);
       });
     }
 
-    function checkAnswer(isCorrect, selectedButton, correctText) {
-      if (answered) return;
+    function chooseAnswer(button,selectedIndex,item){
+      if(answered) return;
       answered = true;
-      const item = questions[currentIndex];
       const buttons = document.querySelectorAll(".option");
-      let correctLetter = "";
+      buttons.forEach(btn => btn.disabled = true);
 
-      buttons.forEach(function(button, index) {
-        button.disabled = true;
-        if (button.dataset.correct === "true") {
-          button.classList.add("correct");
-          correctLetter = String.fromCharCode(65 + index);
-        }
-      });
-
-      if (isCorrect) {
-        score += 10;
-        feedbackBox.innerHTML = "<strong>推理正確！</strong><br>" + item.e;
-      } else {
-        selectedButton.classList.add("wrong");
-        feedbackBox.innerHTML = "<strong>推理失誤，但案件還沒結束。</strong><br>正確答案是：<strong>" + correctLetter + ". " + correctText + "</strong><br>解答：" + item.e;
+      if(selectedIndex === item.a){
+        score++;
+        button.classList.add("correct");
+        feedbackBox.innerHTML = "✅ 答對了！<br>" + item.e;
+      }else{
+        button.classList.add("wrong");
+        buttons.forEach(btn=>{
+          if(btn.textContent === item.o[item.a]) btn.classList.add("correct");
+        });
+        feedbackBox.innerHTML = "❌ 再想想！<br>" + item.e;
       }
+
       scoreNumber.textContent = score;
       feedbackBox.classList.add("show");
       nextButton.disabled = false;
+      makeConfetti(selectedIndex === item.a ? 18 : 7);
     }
 
-    nextButton.addEventListener("click", function() {
+    nextButton.addEventListener("click",()=>{
       currentIndex++;
-      if (currentIndex < questions.length) loadQuestion();
-      else showResult();
+      if(currentIndex < questions.length){
+        loadQuestion();
+      }else{
+        showResult();
+      }
     });
 
-    function showResult() {
+    function showResult(){
       quizArea.style.display = "none";
       resultArea.style.display = "block";
-      finalScore.textContent = "你的總分是：" + score + " / " + (questions.length * 10);
-      if (score >= 130) finalComment.textContent = "完美破案！你已經掌握 GitHub 發布、路徑與 PWA 觀念。";
-      else if (score >= 90) finalComment.textContent = "案件大致破解！再複習 GitHub Pages、檔案路徑與 PWA，就更穩了。";
-      else finalComment.textContent = "線索還有點混亂，重新挑戰一次，下一輪就能抓到關鍵證據。";
+      percentNumber.textContent = "100%";
+      progressBar.style.width = "100%";
+      finalScore.textContent = `你的分數：${score} / ${questions.length}`;
+      if(score >= 13) finalComment.textContent = "太強了！你已經是 GitHub Pages 小工程師。";
+      else if(score >= 9) finalComment.textContent = "很不錯！再複習幾次就能更熟悉網站發布流程。";
+      else finalComment.textContent = "建議重新挑戰一次，把 GitHub、HTML、CSS、JavaScript 的觀念補起來。";
+      makeConfetti(42);
     }
 
-    function restartQuiz() {
+    function restartQuiz(){
       currentIndex = 0;
       score = 0;
-      quizArea.style.display = "block";
+      quizArea.style.display = "grid";
       resultArea.style.display = "none";
       loadQuestion();
     }
 
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    const pointer = {x:null,y:null};
+
+    function resizeCanvas(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const count = Math.min(95, Math.floor(window.innerWidth / 14));
+      particles = Array.from({length:count},()=>({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        vx:(Math.random()-.5)*.7,
+        vy:(Math.random()-.5)*.7,
+        r:Math.random()*1.8+0.8
+      }));
+    }
+    window.addEventListener("resize",resizeCanvas);
+    window.addEventListener("mousemove",e=>{pointer.x=e.clientX;pointer.y=e.clientY});
+    window.addEventListener("touchmove",e=>{const t=e.touches[0]; if(t){pointer.x=t.clientX;pointer.y=t.clientY}}, {passive:true});
+
+    function drawParticles(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>canvas.width) p.vx*=-1;
+        if(p.y<0||p.y>canvas.height) p.vy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="rgba(230,252,255,.75)";
+        ctx.fill();
+      });
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const a=particles[i], b=particles[j];
+          const dx=a.x-b.x, dy=a.y-b.y;
+          const d=Math.hypot(dx,dy);
+          if(d<115){
+            ctx.strokeStyle=`rgba(53,230,255,${(1-d/115)*.22})`;
+            ctx.lineWidth=1;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+          }
+        }
+        if(pointer.x!==null){
+          const a=particles[i];
+          const d=Math.hypot(a.x-pointer.x,a.y-pointer.y);
+          if(d<155){
+            ctx.strokeStyle=`rgba(81,255,156,${(1-d/155)*.5})`;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(pointer.x,pointer.y); ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawParticles);
+    }
+
+    function makeConfetti(amount){
+      for(let i=0;i<amount;i++){
+        const c=document.createElement("div");
+        c.style.position="fixed";
+        c.style.left=(Math.random()*100)+"vw";
+        c.style.top="-12px";
+        c.style.width="8px";
+        c.style.height="14px";
+        c.style.borderRadius="4px";
+        c.style.background=["#35e6ff","#51ff9c","#ffb347","#ff4fd8"][Math.floor(Math.random()*4)];
+        c.style.zIndex="20";
+        c.style.pointerEvents="none";
+        c.style.transform=`rotate(${Math.random()*360}deg)`;
+        c.style.transition=`transform ${1.2+Math.random()*1.1}s ease-out, top ${1.2+Math.random()*1.1}s ease-out, opacity .3s ease`;
+        document.body.appendChild(c);
+        requestAnimationFrame(()=>{
+          c.style.top="105vh";
+          c.style.transform=`translateX(${(Math.random()-.5)*180}px) rotate(${Math.random()*900}deg)`;
+          c.style.opacity="0";
+        });
+        setTimeout(()=>c.remove(),2400);
+      }
+    }
+
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add("show");
+      });
+    },{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+    resizeCanvas();
+    drawParticles();
     loadQuestion();
   </script>
 </body>
